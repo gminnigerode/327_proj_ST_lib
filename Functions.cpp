@@ -7,6 +7,7 @@
  */
 #include <iostream>
 #include <memory>
+#include <vector>
 
 #include "./includes/Functions.h"
 #include "./includes/Smalltalk_American.h"
@@ -14,6 +15,8 @@
 #include "./includes/Smalltalk_Brit.h"
 #include "./includes/Watch.h"
 #include "./includes/constants.h"
+
+using namespace std;
 
 //create a vector with appropriate numbers of Smalltalk_Brit,Smalltalk_American and ST_American_DonutEnthusiest
 //objects using unique pointers.  Since we are using c++11 returning this vector by value is fine since the 
@@ -23,7 +26,7 @@ std::vector<std::unique_ptr<Smalltalk>> getPeople(int numBrit,
 		int numWatches) {
 	
 	//create a vector to hold SmallTalk unique pointers
-
+	vector<std::unique_ptr<Smalltalk>> stPointers;
 		//add brits to vector
 
 		//add americans  to vector
@@ -36,4 +39,5 @@ std::vector<std::unique_ptr<Smalltalk>> getPeople(int numBrit,
 		//from this function(see Smalltalk header for hints)
 
 		//return your vector
+	return stPointers;
 }
