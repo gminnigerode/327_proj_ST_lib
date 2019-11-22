@@ -24,20 +24,32 @@ using namespace std;
 std::vector<std::unique_ptr<Smalltalk>> getPeople(int numBrit,
 		int numAmerican, int numbAmericanDonutEnthusiest,
 		int numWatches) {
-	
-	//create a vector to hold SmallTalk unique pointers
+
 	vector<std::unique_ptr<Smalltalk>> stPointers;
-		//add brits to vector
 
-		//add americans  to vector
+	for(int i=1; i<=numBrit; i++){
+		stPointers.emplace_back(new Smalltalk_Brit(i));
+	}
 
-		//add american donut enthusiest  to vector
+	for(int i=1; i<=numAmerican; i++){
+		stPointers.emplace_back(new Smalltalk_American(i));
+	}
 
-		//create some watches (as long as number watches <= numb people)
-		//then give the watches away to first NUM_WATCHES people in the vector
-		// when you are finished using the vector you return
-		//from this function(see Smalltalk header for hints)
+	for(int i=1; i<=numbAmericanDonutEnthusiest; i++){
+		stPointers.emplace_back(new ST_American_DonutEnthusiest(i));
+	}
 
-		//return your vector
+	if(stPointers.size()>=numWatches){
+		for(int i = 0; i<numWatches; i++){
+			unique_ptr<Watch> tempWatch(new Watch);
+			stPointers[i]->giveWatch(tempWatch);
+		}
+	}
+	else{
+		for(int i=0; i<stPointers.size(); i++){
+			unique_ptr<Watch> tempWatch(new Watch);
+			stPointers[i]->giveWatch(tempWatch);
+		}
+	}
 	return stPointers;
 }

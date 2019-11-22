@@ -1,3 +1,9 @@
+/*
+ * Smalltalk.cpp
+ *      Author: keith
+ *      Author: George Minnigerode
+ */
+
 #include <vector>
 #include <memory>
 #include "./includes/Smalltalk.h"
@@ -14,18 +20,31 @@ Smalltalk::~Smalltalk(void){
 }
 
 string Smalltalk::saySomething(){
-	return "";
+	string phrase = nationality + " " + to_string(iPerson) + ": ";
+	phrase += mySmallTalk[current_phrase%mySmallTalk.size()];
+	current_phrase++;
+	return phrase;
 }
 
 string Smalltalk::getTime(){
-	return "";
+	if(pWatch == 0){
+		return I_DO_NOT_HAVE_A_WATCH;
+	}
+	return pWatch->getTime();
 }
 
 unique_ptr<Watch> Smalltalk::takeWatch(){
-	return NULL;
+	if(pWatch == 0){
+		return unique_ptr<Watch>();
+	}
+	unique_ptr<Watch> tempWatch = move(pWatch);
+	return tempWatch;
 }
 
 bool Smalltalk::giveWatch(std::unique_ptr<Watch> &pWatch){
+	if(this->pWatch != 0){
+		return false;
+	}
+	this->pWatch = move(pWatch);
 	return true;
 }
-
